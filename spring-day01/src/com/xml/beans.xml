@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--依赖注入:使用构造方法注入  -->
+	<bean id="car" class="com.xml.Car">
+		<constructor-arg name="name" value="宝马"></constructor-arg>
+	</bean>
+	
+	
+    <bean id="user" class="com.xml.User" init-method="init" destroy-method="destory" scope="singleton">   
+    	<!-- 依赖注入,其实就是属性注入(为属性赋值),set注入  -->
+    	<property name="name" value="wzj"></property>
+    	<property name="car" ref="car"></property>
+    </bean>
+</beans>
