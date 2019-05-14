@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="car" class="com.xml.Car">
+		<property name="name" value="宝马"></property>
+	</bean>
+	
+	<!--id我一般写为类名首字母小写  -->
+    <bean id="person" class="com.xml.Person">  
+    	<!--一:spel基本操作  -->
+    	<!--name属性值也可以通过spel引用  --> 
+ 		<property name="name" value="#{car.name}"></property>
+ 		<!-- <property name="car" ref="car"></property> -->
+ 		<!--使用spel方式  -->
+ 		<property name="car" value="#{car}"></property>
+ 		
+ 		<!--二:spel可以将方法的返回值也注入给属性：method1=3  -->
+ 		<property name="method1" value="#{'str'.length()}"></property>
+ 		<!--在容器中,car相当于是Car类型的一个对象，然后对象调方法 -->
+ 		<property name="method2" value="#{car.carRun('Start')}"></property>
+ 		
+ 		<!--三:spel表达式 和 三目运算符-->
+ 		<!--
+ 			spel操作符跟java中的一样 
+ 			关系操作符
+　　			包括：等于 (==, eq)，不等于 (!=, ne)，小于 (<, lt),
+				小于等于(<= , le)，大于(>, gt)，大于等于 (>=, ge)
+			xml是不支持< ,<=  所以要转义成 lt
+ 		  -->
+ 		<property name="operator1" value="#{1 lt 2}"></property>
+ 		<property name="operator2" value="#{2*2}"></property>
+ 		<property name="operator3" value="#{1>2 ? true : false}"></property>
+ 		
+ 		<!--四:4.springEl 操作List,Map集合取值-->
+ 		<property name="map_str" value="#{car.map['MapA']}"></property>
+ 		<property name="list_str" value="#{car.list[0]}"></property>
+    </bean>
+</beans>

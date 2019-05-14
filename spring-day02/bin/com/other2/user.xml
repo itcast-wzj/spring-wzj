@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+		
+		<bean id="car" class="com.other2.Car">
+			<property name="name" value="宝马"></property>
+		</bean>
+		<bean id="user" class="com.other2.User">
+			<!--也可以用spel表达式 -->
+			<property name="car" ref="car"></property>
+			<!--复杂类型注入  -->
+			<!--一:list  -->
+			<property name="lists">
+				<list>
+					<value>list01</value>
+					<value>list02</value>
+					<!--引用一个car  -->
+					<ref bean="car"/>
+					<!--或者自定义一个Car,new Car()-->
+					<bean class="com.other2.Car">
+						<property name="name" value="奔驰"></property>
+					</bean>
+				</list>
+			</property>
+			
+			<!--二:map  -->
+			<property name="maps">
+				<map>
+					<entry key="user" value="root"></entry>
+					<entry key="pwd" value="123"></entry>
+				</map>
+			</property>
+			
+			<!--三:map  -->
+			<property name="prop">
+				<props>
+					<prop key="username">wzj</prop>
+					<prop key="pwd">123</prop>
+				</props>
+			</property>
+		</bean>
+	
+</beans>

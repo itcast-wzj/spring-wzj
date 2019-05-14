@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!--
+		因为java基础就是通过set/构造为属性赋值
+		四种注入方式
+		1.set注入
+		2.构造注入
+		3.p名称空间注入
+		4.spel注入
+	  -->
+	<!--一:set注入,属性必须提供set方法  -->
+    <!-- <bean id="user" class="com.other.User">   
+        <property name="name" value="wzj"></property>
+        <property name="password" value="123"></property>
+    </bean> -->
+    
+    <!--二:构造方法注入,必须提供有参构造  -->
+    <!-- <bean id="user" class="com.other.User">
+    	name属性：构造函数的参数名 
+    	index属性：构造函数的参数索引 
+    	type属性：构造函数的参数类型 
+    	<constructor-arg name="name" index="0" type="java.lang.String" value="wzj"></constructor-arg>
+    	<constructor-arg name="password" index="1" type="java.lang.String" value="123"></constructor-arg>
+    </bean> -->
+    
+     <!--三:p名称空间注入：引入了p约束文件,但还是没有提示  -->
+     <!-- <bean id="user" class="com.other.User" p:name="wzj" p:password="123"></bean> -->
+	
+	 <!--四:spel注入，我这里是把user2里面属性的值,注入(赋值)给user里面的属性,两个类并无关联,通过spel可以做到  -->
+	 <bean id="user2" class="com.other.User2">
+	 	<property name="name" value="u2_name"></property>
+	 	<property name="password" value="u2_pwd"></property>
+	 </bean>
+	 <bean id="user" class="com.other.User">
+	  	<property name="name" value="#{user2.name}"></property>
+	  	<property name="password" value="#{user2.password}"></property>
+	 </bean>
+</beans>
