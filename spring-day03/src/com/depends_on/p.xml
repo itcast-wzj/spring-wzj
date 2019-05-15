@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Person类 name car -->
+	<bean id="person" class="com.depends_on.Person" depends-on="car">
+		<property name="name" value="wzj"></property>
+		<property name="car" ref="car"></property>
+	</bean>
+
+	<bean id="car" class="com.depends_on.Car">
+		<property name="name" value="宝马"></property>
+	</bean>
+
+</beans>
