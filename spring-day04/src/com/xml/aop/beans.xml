@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd 
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop.xsd ">
+
+   <bean id="student" class="com.xml.aop.Student" p:name="wzj" p:age="20"/>
+   <bean id="aspect" class="com.xml.aop.Advice"/>
+   <aop:config>
+   		<aop:aspect id="myAspect" ref="aspect">
+   			<aop:pointcut expression="execution(* com.xml.aop.Student.getName())" id="cut"/>
+   			<aop:before method="beforeAdvice" pointcut-ref="cut" />
+   			<!-- after-returning才是后置通知，after不是 -->
+   			<aop:after-returning method="afterAdvice" pointcut-ref="cut"/>
+   		</aop:aspect>
+   </aop:config>
+</beans>
