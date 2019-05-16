@@ -13,7 +13,7 @@
 
 - **https://blog.csdn.net/changudeng1992/article/details/80625134**
 
-
+- **https://baike.baidu.com/item/AOP/1332219?fr=aladdin** aop百度百科其实也讲的蛮好
 ## 1.2、实现AOP的两种方式
 
 ### 1.2.1、前提
