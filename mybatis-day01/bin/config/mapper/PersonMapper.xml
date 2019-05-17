@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<!--现在使用dao方式,这里必须是Dao接口的类路径 -->
+<mapper namespace="com.dao.PersonMapper"> 
+
+  <!--id必须和Dao接口中的方法一致  -->
+  <insert id="addUser" parameterType="Person">
+   		insert into person(name,age) values(#{name},#{age})
+  </insert>
+</mapper>
+

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!--相当于全局配置文件,其他的xml引入这里面来
+  	     就像spring中的applicationContext.xml一样
+    -->
+  <properties resource="config/jdbc/jdbc.properties"></properties>
+  <typeAliases>
+  	<!--定义别名,这样写sql标签的时候,如果返回一个对象,就不用写类路径了,写个类名就行  -->
+  	<package name="com.bean"/>
+  </typeAliases>
+
+  <environments default="development">
+    <environment id="development">
+      <!--mybatis采用的事务管理是jdbc  -->
+      <transactionManager type="JDBC"/>
+      <dataSource type="POOLED">
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+  <mappers>
+  	<!--1.xml方式  -->
+   	<mapper resource="config/mapper/UserMapper.xml"/>
+   	<!--2.注解方式  -->
+   	<mapper class="com.dao.AnimalDao"/>
+   	<!--3.mapper方式  -->
+   	<mapper resource="config/mapper/PersonMapper.xml"/>
+  </mappers>
+</configuration>
