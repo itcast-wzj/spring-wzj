@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--
+		mybatis中引入<properties resource="jdbc.properties"/>
+		spring中引入jdbc.properties 
+	 -->
+	<context:property-placeholder location="classpath:jdbc.properties"/>
+
+	<!-- spring整合mybatis之后，数据源由spring管理 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--SqlSessionFactory需要数据源来创建sqlSession(会话)  -->
+		<property name="dataSource" ref="dataSource"></property>
+		<!--
+			对应之前mybatis的<typeAliases>
+			<typeAliases>
+				<package name="com.bean"/>
+			</typeAliases>
+  		-->
+		<property name="typeAliasesPackage" value="com.bean"></property>
+		<!-- 
+			对应之前mybatis在全局配置文件中加载mapper映射文件
+			<mapper resource="mapper/UserMapper.xml"/>
+		 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml"></property>
+	</bean>
+	
+	<!-- 扫描mapper接口 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.mapper"></property>
+		<!--我项目里没加这个也行 -->
+		<!-- <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property> -->
+	</bean>
+</beans>

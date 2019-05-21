@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<!--分模块配置  -->
+	<!--到入spring和mybatis整合的xml -->
+	<import resource="mybatis/spring-mybatis.xml"/>
+	
+	<!--
+		1.这个确实是扫描类上带有@compoent,@controller,@service,@repository之类的注释,然后以类首字母小写注入容器中
+		2.而且还具有<context:annotation-config/>标签的功能
+		 博客：https://blog.csdn.net/u010081710/article/details/77187366
+	  -->
+	<context:component-scan base-package="com.bean"/>
+
+</beans>
