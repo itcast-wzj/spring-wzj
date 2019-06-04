@@ -1,0 +1,8 @@
+写这restful风格出现了405的错误
+检查代码好久,发现并没有什么错误
+
+三种简单处理的办法！
+ 第一：tomcat换到7.0以及以下版本 
+ 第二：请求先转给一个Controller,再返回jsp页面 
+ 第三种：在你的success页面头部文件将 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%> 多加一句话：isErrorPage设置为true，默认为false
+ 在返回的页面加上就行
