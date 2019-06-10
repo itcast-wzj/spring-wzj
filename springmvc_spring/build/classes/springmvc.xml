@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+	
+ 	 <!--
+
+			需要进行Spring整合SpringMVC吗
+			还是否需要再加入Spring的IOC容器?
+			是否需要在web.xml文件中配置启动spring IOC容器的ContextLoaderListener?
+			
+			1.需要：通常情况下，类似于数据源，事务，整合其他框架都是放在Spring的配置文件中
+			(而不是放在SpringMVC的配置文件中)，实际上放入Spring配置文件对应的IOC容器还有Service和Dao
+			
+			2.不需要: 都放在SpringMVC的配置文件中(这样不是很好)
+					  也可以分多个Spring的配置文件, 然后使用import节点导入其他的配置文件
+	 -->
+		  
+	 <!--
+			问题: 若Spring的IOC容器 和 SpringMVC的IOC容器扫描的包有重合的部分,就会导致有的bean会被创建2次
+			解决
+			1. 使SpringIOC的容器扫描的包 和SpringMVC的IOC容器扫描的包没有重合的部分
+				(实际开发中其实这种情况很难做到，因为都是分模块开发)
+				
+			2.使用exclude-filter 和 include-filter 子节点来规定只能扫描的注解
+	
+	  -->
+	
+	 <!--
+			SpringMVC的IOC容器中的bean 可以来引用 Spring IOC容器中的bean
+			反之则不行！！！
+			
+			这样理解: spring(类)包含springmvc(方法)
+					springmvc: 我可以用全局变量,但别人不能用我的局部变量
+	  -->
+		
+	
+	<!--use-default-filters=true 这个的意思就是默认情况下@compoent,@Controller类型的全扫描  -->
+	<context:component-scan base-package="com.user" use-default-filters="false">
+			<context:include-filter 
+				type="annotation" expression="org.springframework.stereotype.Controller"/>
+			<context:include-filter
+				type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+	</context:component-scan>
+	
+	<!--视图解析器  -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+</beans>
