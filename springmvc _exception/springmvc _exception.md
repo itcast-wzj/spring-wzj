@@ -8,9 +8,19 @@
 
 使用了<mvc:annotation-driven> 才有数组第一个元素**ExceptionHandlerExceptionResolver**
 
-默认是一个过期的ExceptionResolver,你可以通过Debug断点看
+默认是一个过期的**AnnotationMethodHandlerExceptionResolver**,你可以通过Debug断点看
 
 ![](./images/2019-06-10_101825.png)
+
+**HandlerExceptionResolver结构图**
+
+![](./images/2019-06-10_125724.png)
+
+**为什么强调要加<mvc:annotation-driven> 呢？**
+
+**不加的话，使用@controllerAdvice 可能会出现错误**
+
+
 
 ## 1.1 @ExceptionHandler注解的用法
 
