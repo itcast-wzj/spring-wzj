@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 	<!--  
+ 		到时候可以配置一些高级的功能：二级缓冲（虽然好像可以直接在SqlSessionFactoryBean的属性中配）
+ 		但我感觉还是明确点好
+ 	  -->
+</configuration>
