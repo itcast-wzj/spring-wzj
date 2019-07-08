@@ -1,0 +1,33 @@
+1.问题描述:
+博客：https://blog.csdn.net/weixangyu2012/article/details/73991995
+我在pom.xml文件中引入了一些依赖，而这些依赖也下载到了我的本地仓库（我去看了）
+但是却在项目上和pom.xml上报了个红叉,然后打开problems视图，说Misssing....jar
+就是找不到jar包，我明明有啊，然后我update maven 也没有用，最终cmd 进入到项目下面
+mvn clear install , 然后去update maven就好了
+
+
+2.mybatis 逆向生成的github地址
+https://github.com/mybatis/generator
+步骤:
+1.导入jar包
+2.去官网找到配置,然后修改成想要的(Quick start guide-->xml configuration)
+3.然后去官网找到运行配置,运行即可(Running Mybatis Generator)
+4.最后刷新项目
+
+3.出现只有@controller注解有提示，
+其他无论是注解还是普通一些提示都没了 但鼠标放在
+那发现可以导进去 ，每次都要手动导入，很麻烦
+解决方案：
+preferences--->java--->Editor--->Content Assist---->Advanced
+把 spring Annotation Proposal 勾给去掉就行
+
+
+4.pageHelper插件
+github文档：https://github.com/pagehelper/Mybatis-PageHelper
+先引入jar包，然后在mybatis全局配置文件中引入
+<plugins>
+	<plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+</plugins>
+
+5.java.util.concurrent.ExecutionException: org.apache.catalina.LifecycleException: Failed to start component [StandardEngine[Catalina].StandardHost[localhost].StandardContext[/SSM-CURD]]
+Caused by: java.lang.IllegalArgumentException: Invalid <url-pattern> [url] in servlet mapping
